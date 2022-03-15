@@ -102,6 +102,9 @@ class Connection extends Component
      */
     public $dslVersion = 5;
 
+    
+    public $sslValidation = true;
+
     /**
      * @var resource the curl instance returned by [curl_init()](http://php.net/manual/en/function.curl-init.php).
      */
@@ -481,6 +484,11 @@ class Connection extends Component
             unset($options[CURLOPT_WRITEFUNCTION]);
         } else {
             $options[CURLOPT_NOBODY] = false;
+        }
+
+        if ($this->sslValidation === false) {
+            $options[CURLOPT_SSL_VERIFYHOST] = false;
+            $options[CURLOPT_SSL_VERIFYPEER] = false;
         }
 
         if (is_array($url)) {
