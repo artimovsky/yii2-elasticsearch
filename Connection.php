@@ -102,8 +102,10 @@ class Connection extends Component
      */
     public $dslVersion = 5;
 
-    
-    public $sslValidation = true;
+    /**
+     * If TRUE, curl will be stop verifying the peer's certificate
+     */
+    public $sslVerification = true;
 
     /**
      * @var resource the curl instance returned by [curl_init()](http://php.net/manual/en/function.curl-init.php).
@@ -486,8 +488,7 @@ class Connection extends Component
             $options[CURLOPT_NOBODY] = false;
         }
 
-        if ($this->sslValidation === false) {
-            $options[CURLOPT_SSL_VERIFYHOST] = false;
+        if ($this->sslVerification === false) {
             $options[CURLOPT_SSL_VERIFYPEER] = false;
         }
 
